@@ -17,43 +17,13 @@ export class HomeComponent implements OnInit {
     // this.ofertas = this.ofertaService.getOfertas();
     // console.log(this.ofertas);
 
-    this.ofertaService.getOfertas2()
+    this.ofertaService.getOfertas()
       .then((oferta: Oferta[]) => {
         this.ofertas = oferta;
-        console.log('Estas sao as oferatas:', oferta);
       }).catch((err: any) => {
-        console.log('nao deu erro catch', err);
+        console.log('Erro capturado :', err);
       }
       );
-
-    // this.ofertaService.getOfertas2()
-    //   .then((oferta: Oferta[]) => {
-    //     this.ofertas = oferta;
-    //     console.log('Estas sao as oferatas:', oferta);
-    //   },
-    //   (rejeito: any) => {
-    //     console.log('nao deu erro rejeito: ', rejeito);
-    //   }
-    //   ).catch((err: any) => {
-    //     console.log('nao deu erro catch', err);
-    //   }
-    //   );
-
-    // this.ofertaService.getOfertas3().subscribe((ofertasData: Oferta[]) => {
-    //   this.ofertas = ofertasData;
-    //   console.log('Estas sao as oferatas:', ofertasData);
-    // }, (err: any) => {
-    //   console.log('Recebi o seguinte erro : ', err);
-    // });
-
-    // this.ofertaService.getOfertas3().subscribe({
-    //   next(ofertasData: Oferta[] ) {
-    //     console.log('Estas sao as oferatas:', ofertasData);
-    //   },
-    //   error(erro: any) {
-    //     console.log('Recebi o seguinte erro : ', erro);
-    //   }
-    // });
 
   }
 
