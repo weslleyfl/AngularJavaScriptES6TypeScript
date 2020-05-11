@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,7 @@ import { RodapeComponent } from './rodape/rodape.component';
 import { DiversaoComponent } from './diversao/diversao.component';
 import { RestaurantesComponent } from './restaurantes/restaurantes.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
+import { OfertaComponent } from './oferta/oferta.component';
 
 @NgModule({
    declarations: [
@@ -19,14 +20,17 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
       RodapeComponent,
       DiversaoComponent,
       RestaurantesComponent,
-      NoPageFoundComponent
+      NoPageFoundComponent,
+      OfertaComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule
    ],
-   providers: [],
+   providers: [
+      {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'}
+   ],
    bootstrap: [
       AppComponent
    ]
