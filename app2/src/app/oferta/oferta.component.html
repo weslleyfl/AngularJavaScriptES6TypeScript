@@ -1,48 +1,77 @@
 <div class="container">
-  <div class="oferta">
+    <div class="oferta" *ngIf="oferta">
 
-    <div class="row">
-      <div class="col">
-        <h4>Super Burger - Rodízio de Mini-hambúrger com opção de entrada.</h4>
-      </div>
+        <div class="row">
+            <div class="col">
+                <h4>{{oferta.descricaoOferta}}</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="img_capa">
+                    <img [src]="oferta.imagens[0].url" class="img-fluid" />
+                </div>
+
+                <div class="thumbnails">
+                    <img *ngFor="let imagem of oferta.imagens" [src]="imagem.url" class="img-fluid" />
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col text-center">
+                        <p>Por apenas</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>{{oferta.valor | currency}}</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-warning btn-lg">Adicionar ao carrinho</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- nav tab -->
+
+    <div class="row" style="margin-top: 25px; margin-bottom: 150px;">
+        <div class="col">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="como-usar-tab" data-toggle="tab" routerLink="como-usar" aria-controls="como-usar" role="tab" aria-selected="true">Como usar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="onde-fica-tab" data-toggle="tab" routerLink="onde-fica" role="tab" aria-controls="onde-fica" aria-selected="false">Onde fica?</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                </li> -->
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <router-outlet></router-outlet>
+
+                <!-- <div class="tab-pane fade show active" id="como-usar" role="tabpanel" aria-labelledby="como-usar-tab">
+                    como usar
+                </div>
+                <div class="tab-pane fade" id="onde-fica" role="tabpanel" aria-labelledby="onde-fica-tab">
+                    como fica
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div> -->
+            </div>
+        </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="img_capa">
-          <img src="/assets/ofertas/1/img1.jpg" />
-        </div>
-
-        <div class="thumbnails">
-          <img src="/assets/ofertas/1/img2.jpg" />
-          <img src="/assets/ofertas/1/img3.jpg" />
-          <img src="/assets/ofertas/1/img4.jpg" />
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col text-center">
-            <p>Por apenas</p>
-          </div>
-          
-        </div>
-
-        <div class="row">
-          <div class="col text-center">
-            <h1>R$ 29,90</h1>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col text-center">
-            <button type="button" class="btn btn-warning btn-lg">Adicionar ao carrinho</button>
-          </div>
-        </div>
-          
-      </div>
-
-    </div>
-
-  </div>
+    <!-- fim nav tab -->
 </div>

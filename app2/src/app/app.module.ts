@@ -11,6 +11,8 @@ import { DiversaoComponent } from './diversao/diversao.component';
 import { RestaurantesComponent } from './restaurantes/restaurantes.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { OfertaComponent } from './oferta/oferta.component';
+import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
+import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
 
 @NgModule({
    declarations: [
@@ -21,7 +23,9 @@ import { OfertaComponent } from './oferta/oferta.component';
       DiversaoComponent,
       RestaurantesComponent,
       NoPageFoundComponent,
-      OfertaComponent
+      OfertaComponent,
+      OndeFicaComponent,
+      ComoUsarComponent
    ],
    imports: [
       BrowserModule,
@@ -29,7 +33,7 @@ import { OfertaComponent } from './oferta/oferta.component';
       HttpClientModule
    ],
    providers: [
-      {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'}
+      { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' }
    ],
    bootstrap: [
       AppComponent
