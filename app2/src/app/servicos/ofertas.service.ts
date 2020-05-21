@@ -51,6 +51,34 @@ export class OfertasService {
       );
   }
 
+  public pesquisaOfertas(termo: string): Observable<Oferta[]> {
+    return this.http.get<string>(`${URL_API}?descricaoOferta_like=${termo}`)
+      .pipe(
+        retry(10),
+        map((resposta: any) => resposta),
+        catchError(this.errorHandl)
+      );
+  }
+
+  public sendGetRequest() {
+    return this.http.get<Oferta[]>(`${URL_API}?destaque=true`, { observe: 'response' })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+        tap(res => {
+          console.log(res.headers.get('Link'));
+          // this.parseLinkHeader(res.headers.get('Link'));
+        }));
+  }
+
+
+  /*
+  public sendGetRequest(){
+    // Add safe, URL encoded_page parameter - This tells to returns the first page of 20 products.
+    const options = { params: new HttpParams({fromString: '_page=1&_limit=20'}) };
+    return this.httpClient.get(this.REST_API_SERVER, options).pipe(retry(3), catchError(this.handleError));
+  }
+ */
   // public getOfertas3(): Observable<Oferta[]> {
   //   return new Observable((observer) => {
   //     setTimeout(() => {
@@ -78,6 +106,21 @@ export class OfertasService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+
+  // Error handling
+  private errorHandl(error: any) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
   }
 
 
