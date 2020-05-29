@@ -5,13 +5,20 @@
             "titulo": "Super Burger",
             "descricaoOferta": "Rodízio de Mini-hambúrger com opção de entrada.",
             "anunciante": "Original Burger",
-            "valor": 29.90,
+            "valor": 29.9,
             "destaque": true,
-            "imagens": [
-                { "url": "/assets/ofertas/1/img1.jpg" },
-                { "url": "/assets/ofertas/1/img2.jpg" },
-                { "url": "/assets/ofertas/1/img3.jpg" },
-                { "url": "/assets/ofertas/1/img4.jpg" }
+            "imagens": [{
+                    "url": "/assets/ofertas/1/img1.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/1/img2.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/1/img3.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/1/img4.jpg"
+                }
             ]
         },
         {
@@ -20,13 +27,20 @@
             "titulo": "Cozinha Mexicana",
             "descricaoOferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
             "anunciante": "Mexicana",
-            "valor": 32.90,
+            "valor": 32.9,
             "destaque": true,
-            "imagens": [
-                { "url": "/assets/ofertas/2/img1.jpg" },
-                { "url": "/assets/ofertas/2/img2.jpg" },
-                { "url": "/assets/ofertas/2/img3.jpg" },
-                { "url": "/assets/ofertas/2/img4.jpg" }
+            "imagens": [{
+                    "url": "/assets/ofertas/2/img1.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/2/img2.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/2/img3.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/2/img4.jpg"
+                }
             ]
         },
         {
@@ -35,13 +49,20 @@
             "titulo": "Pizzas Grandes",
             "descricaoOferta": "Pizza Grande, Mussarela, Marguerita ou outras!",
             "anunciante": "Nossa Pizza",
-            "valor": 21.90,
+            "valor": 21.9,
             "destaque": false,
-            "imagens": [
-                { "url": "/assets/ofertas/3/img1.jpg" },
-                { "url": "/assets/ofertas/3/img2.jpg" },
-                { "url": "/assets/ofertas/3/img3.jpg" },
-                { "url": "/assets/ofertas/3/img4.jpg" }
+            "imagens": [{
+                    "url": "/assets/ofertas/3/img1.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/3/img2.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/3/img3.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/3/img4.jpg"
+                }
             ]
         },
         {
@@ -50,15 +71,26 @@
             "titulo": "Estância das águas",
             "descricaoOferta": "Diversão garantida com piscinas, trilhas e muito mais.",
             "anunciante": "Estância das águas",
-            "valor": 31.90,
+            "valor": 31.9,
             "destaque": true,
-            "imagens": [
-                { "url": "/assets/ofertas/4/img1.jpg" },
-                { "url": "/assets/ofertas/4/img2.jpg" },
-                { "url": "/assets/ofertas/4/img3.jpg" },
-                { "url": "/assets/ofertas/4/img4.jpg" },
-                { "url": "/assets/ofertas/4/img5.jpg" },
-                { "url": "/assets/ofertas/4/img6.jpg" }
+            "imagens": [{
+                    "url": "/assets/ofertas/4/img1.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/4/img2.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/4/img3.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/4/img4.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/4/img5.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/4/img6.jpg"
+                }
             ]
         },
         {
@@ -67,11 +99,14 @@
             "titulo": "Kart",
             "descricaoOferta": "Bateria de Kart de 30 minutos.",
             "anunciante": "Speed Kart",
-            "valor": 54.90,
+            "valor": 54.9,
             "destaque": false,
-            "imagens": [
-                { "url": "/assets/ofertas/5/img1.jpg" },
-                { "url": "/assets/ofertas/5/img2.jpg" }
+            "imagens": [{
+                    "url": "/assets/ofertas/5/img1.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/5/img2.jpg"
+                }
             ]
         },
         {
@@ -80,11 +115,14 @@
             "titulo": "Academia de tiro",
             "descricaoOferta": "Sessão de tiro dinâmico com Instrutor, Estande, Alvo e Equipamentos.",
             "anunciante": "Academia de Tiro",
-            "valor": 89.90,
+            "valor": 89.9,
             "destaque": false,
-            "imagens": [
-                { "url": "/assets/ofertas/6/img1.jpg" },
-                { "url": "/assets/ofertas/6/img2.jpg" }
+            "imagens": [{
+                    "url": "/assets/ofertas/6/img1.jpg"
+                },
+                {
+                    "url": "/assets/ofertas/6/img2.jpg"
+                }
             ]
         }
     ],
@@ -113,7 +151,6 @@
             "descricao": "Não é necessário agendar. Sujeito à fila."
         }
     ],
-
     "onde-fica": [{
             "id": 1,
             "descricao": "Avenida João da Silva, 255, São Paulo - SP"
@@ -138,5 +175,6 @@
             "id": 6,
             "descricao": "Estrada Maria das Graças, 12, Salvador - BA "
         }
-    ]
+    ],
+    "pedidos": []
 }

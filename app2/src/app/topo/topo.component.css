@@ -6,7 +6,7 @@
     color: #C1E4FF
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: #FFF
 }
 
@@ -20,5 +20,9 @@
 }
 
 .active {
-    color: #FFF 
+    color: #FFF
+}
+
+.navbar {
+    color: #FFF
 }

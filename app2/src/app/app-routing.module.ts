@@ -7,6 +7,7 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { OfertaComponent } from './oferta/oferta.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
+import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 
 // https://www.positronx.io/angular-router-tutorial/
 
@@ -25,8 +26,10 @@ const routes: Routes = [
       { path: 'onde-fica', component: OndeFicaComponent }
     ]
   },
+  { path: 'ordem-compra', component: OrdemCompraComponent },
   // { path: 'product-detail/:id/:subId', component: ProductDetailComponent }
   { path: '**', component: NoPageFoundComponent }
+
 ];
 
 @NgModule({

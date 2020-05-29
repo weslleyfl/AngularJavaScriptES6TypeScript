@@ -3,7 +3,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry, tap, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../shared/oferta.model';
-import { URL_API, URL_API_COMO_USAR, URL_API_ONDE_FICA } from '../constantes/app.api';
+import { URL_API_OFERTA, URL_API_COMO_USAR, URL_API_ONDE_FICA } from '../constantes/app.api';
 
 // import 'rxjs/add/operator/toPromise';
 
@@ -19,17 +19,17 @@ export class OfertasService {
 
   public getOfertas(): Promise<Oferta[]> {
     // efetuar uma requisiçao http
-    return this.http.get<Oferta[]>(`${URL_API}?destaque=true`).toPromise();
+    return this.http.get<Oferta[]>(`${URL_API_OFERTA}?destaque=true`).toPromise();
     // .then((response: any) => response);
 
   }
 
   public getOfertasPorCategoria(categoria: string): Observable<Oferta[]> {
-    return this.http.get<Oferta[]>(`${URL_API}?categoria=${categoria}`);
+    return this.http.get<Oferta[]>(`${URL_API_OFERTA}?categoria=${categoria}`);
   }
 
   public getOfertaPorId(id: number): Observable<Oferta> {
-    return this.http.get<Oferta>(`${URL_API}?id=${id}`)
+    return this.http.get<Oferta>(`${URL_API_OFERTA}?id=${id}`)
       .pipe(
         tap((ofer: Oferta) => console.log(`tap: id=${id}`, ofer[0])),
         map((oferta: Oferta) => oferta[0]),
@@ -52,7 +52,7 @@ export class OfertasService {
   }
 
   public pesquisaOfertas(termo: string): Observable<Oferta[]> {
-    return this.http.get<string>(`${URL_API}?descricaoOferta_like=${termo}`)
+    return this.http.get<string>(`${URL_API_OFERTA}?descricaoOferta_like=${termo}`)
       .pipe(
         retry(10),
         map((resposta: any) => resposta),
@@ -61,7 +61,7 @@ export class OfertasService {
   }
 
   public sendGetRequest() {
-    return this.http.get<Oferta[]>(`${URL_API}?destaque=true`, { observe: 'response' })
+    return this.http.get<Oferta[]>(`${URL_API_OFERTA}?destaque=true`, { observe: 'response' })
       .pipe(
         retry(3),
         catchError(this.handleError),

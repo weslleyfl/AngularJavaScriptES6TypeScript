@@ -14,7 +14,7 @@ import { switchMap, debounceTime, distinctUntilChanged, catchError } from 'rxjs/
 export class TopoComponent implements OnInit {
 
   public ofertas: Observable<Oferta[]>;
-  public ofertas2: Oferta[];
+  // public ofertas2: Oferta[];
   private subjectPesquisa: Subject<string> = new Subject<string>();
 
   constructor(private ofertaService: OfertasService) { }
@@ -26,7 +26,7 @@ export class TopoComponent implements OnInit {
         debounceTime(1000), // executa a açao switchMap pos 1 segundo
         distinctUntilChanged(), // para fazer uma pesquisa distinct
         switchMap((termo: string) => {
-          console.log('Requisicao http para a API');
+          // console.log('Requisicao http para a API');
 
           if (termo.trim() === '') {
             return of<Oferta[]>([]);
@@ -37,17 +37,17 @@ export class TopoComponent implements OnInit {
           console.log('Erro encontrado', error);
           return of<Oferta[]>([]);
         })
-      )
+      );
 
     // quem recebe o subject
-    this.ofertas.subscribe(
-      (ofertas: Oferta[]) => {
-        console.log('Oferas', ofertas);
-        this.ofertas2 = ofertas;
-      },
-      (error: any) => { console.log('Erro no subscribe ', error); },
-      () => console.log('Fluxo de eventos completo!')
-    );
+    // this.ofertas.subscribe(
+    //   (ofertas: Oferta[]) => {
+    //     console.log('Oferas', ofertas);
+    //     this.ofertas2 = ofertas;
+    //   },
+    //   (error: any) => { console.log('Erro no subscribe ', error); },
+    //   () => console.log('Fluxo de eventos completo!')
+    // );
 
     // https://www.techiediaries.com/angular/angular-9-8-tutorial-by-example-rest-crud-apis-http-get-requests-with-httpclient/
 
@@ -59,25 +59,26 @@ export class TopoComponent implements OnInit {
   }
 
   public pesquisarOferta(termoPesquisa: string): void {
-    console.log('KeyUp acionado', termoPesquisa);
+    // console.log('KeyUp acionado', termoPesquisa);
     this.subjectPesquisa.next(termoPesquisa);
   }
 
-  public pesquisa(termoPesquisa: string): void {
-    console.log(termoPesquisa);
-    this.ofertas = this.ofertaService.pesquisaOfertas(termoPesquisa);
+  // public pesquisa(termoPesquisa: string): void {
+  //   console.log(termoPesquisa);
+  //   this.ofertas = this.ofertaService.pesquisaOfertas(termoPesquisa);
 
-    this.ofertas.subscribe(
-      (ofertas: Oferta[]) => {
-        console.log('oferas', ofertas);
-      },
-      (error: any) => { console.log(error); },
-      () => console.log('Fluxo de eventos completo!')
-    );
+  //   this.ofertas.subscribe(
+  //     (ofertas: Oferta[]) => {
+  //       console.log('oferas', ofertas);
+  //     },
+  //     (error: any) => { console.log(error); },
+  //     () => console.log('Fluxo de eventos completo!')
+  //   );
 
+  // }
 
-
+  public limpaPesquisa(): void {
+    this.subjectPesquisa.next('');
   }
-
 
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, DEFAULT_CURRENCY_CODE } from '@angular/core';
+import { NgModule, DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,18 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { OfertaComponent } from './oferta/oferta.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
+import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
+
+// pipies
+import { DescricaoReduzidaPipe } from './util/descricao-reduzida.pipe';
+
+// format cultura language
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component';
+
+
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
    declarations: [
@@ -25,7 +37,10 @@ import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
       NoPageFoundComponent,
       OfertaComponent,
       OndeFicaComponent,
-      ComoUsarComponent
+      ComoUsarComponent,
+      DescricaoReduzidaPipe,
+      OrdemCompraComponent,
+      OrdemCompraSucessoComponent
    ],
    imports: [
       BrowserModule,
@@ -33,10 +48,12 @@ import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
       HttpClientModule
    ],
    providers: [
-      { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' }
+      { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+      { provide: LOCALE_ID, useValue: 'pt-BR' }
    ],
    bootstrap: [
       AppComponent
-   ]
+   ],
+   exports: []
 })
 export class AppModule { }

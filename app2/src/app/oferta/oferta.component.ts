@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { OfertasService } from '../servicos/ofertas.service';
 import { Oferta } from '../shared/oferta.model';
 import { Observable, interval, Subscribable, Subscriber, Subscription } from 'rxjs';
@@ -21,12 +21,17 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.ofertaService.getOfertaPorId(this.route.snapshot.params[`id`])
-      .subscribe((retorno: Oferta) => {
-        this.oferta = retorno;
-      }, (err) => {
-        console.log('Error capturado: ', err);
-      });
+    // cada modificaçao no parametro da url este subscribe e disparado
+    this.route.params.subscribe((parametros: Params) => {
+
+      this.ofertaService.getOfertaPorId(parametros.id) // this.route.snapshot.params[`id`]
+        .subscribe((retorno: Oferta) => {
+          this.oferta = retorno;
+        }, (err) => {
+          console.log('Error capturado: ', err);
+        });
+
+    });
 
   }
 
