@@ -11,8 +11,11 @@ import { OrdemCompraService } from '../servicos/ordem-compra.service';
 })
 export class OrdemCompraComponent implements OnInit {
 
+  // recuperando a variavel de formulario #
   @ViewChild('formulario') public formulario: NgForm;
-  public model: any = {};
+  // public model: any = {};
+  public model = new Pedido(0, '', '', '', '');
+  public idPedidoCompra: number;
 
   constructor(private ordemCompraService: OrdemCompraService) { }
 
@@ -20,12 +23,29 @@ export class OrdemCompraComponent implements OnInit {
 
   }
 
+  public confirmarCompra(form): void {
+    console.log(form.value);
+    // console.log(this.formulario);
+    // console.log(this.model);
 
-  public confirmarCompra(): void {
-    console.log(this.formulario);
-    console.log(this.model);
+    // const pedido = new Pedido(
+    //   0,
+    //   form.value.endereco,
+    //   form.value.numero,
+    //   form.value.complemento,
+    //   form.value.formaPagamento
+    // );
 
-    this.formulario.reset();
+    // console.log('pedido ', pedido);
+
+    this.ordemCompraService.efetivarCompra(this.model)
+      .subscribe((idPedido: number) => {
+        console.log('Pedido cadastrado com sucesso! Id do Pedido', idPedido);
+        this.idPedidoCompra = idPedido;
+      },
+      (error: any) => console.log('Erro encontrado!', error));
+
+
   }
 
 }

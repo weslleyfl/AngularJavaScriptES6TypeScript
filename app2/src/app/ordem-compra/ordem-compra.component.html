@@ -1,8 +1,9 @@
 <!-- Exemplo de formulario https://jasonwatmore.com/post/2020/04/23/angular-9-template-driven-forms-validation-example -->
+<!-- https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/ -->
 
 <div class="container">
-    <div class="ordem-compra">
-        <form novalidate #formulario="ngForm" (ngSubmit)="formulario.form.valid && confirmarCompra()">
+    <div class="ordem-compra" *ngIf="idPedidoCompra === undefined">
+        <form novalidate #formulario="ngForm" (ngSubmit)="formulario.form.valid && confirmarCompra(formulario)">
 
             <h5>Sua Compra</h5>
             <hr />
@@ -116,4 +117,10 @@
             <button type="submit" class="btn btn-primary btn-lg" [disabled]="!formulario.form.valid">Cofirmar compra</button>
         </form>
     </div>
+
+
+    <div class="ordem-compra" *ngIf="idPedidoCompra !== undefined">
+        <app-ordem-compra-sucesso [idPedidoCompra]="idPedidoCompra"></app-ordem-compra-sucesso>
+    </div>
+
 </div>
