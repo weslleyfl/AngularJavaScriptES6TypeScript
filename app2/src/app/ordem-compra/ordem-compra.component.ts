@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Pedido } from '../shared/pedido.model';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 import { OrdemCompraService } from '../servicos/ordem-compra.service';
+import { Pedido } from './../shared/pedido.model';
+
 
 
 @Component({
@@ -11,41 +13,45 @@ import { OrdemCompraService } from '../servicos/ordem-compra.service';
 })
 export class OrdemCompraComponent implements OnInit {
 
-  // recuperando a variavel de formulario #
-  @ViewChild('formulario') public formulario: NgForm;
-  // public model: any = {};
-  public model = new Pedido(0, '', '', '', '');
   public idPedidoCompra: number;
+  // public formulario = new FormGroup({
+  //   endereco: new FormControl(''),
+  //   numero: new FormControl(''),
+  //   complemento: new FormControl(''),
+  //   formaPagamento: new FormControl('')
+  // });
 
-  constructor(private ordemCompraService: OrdemCompraService) { }
+  // The FormBuilder service has three methods: control(), group(), and array().
+  public formulario = this.fb.group({
+    endereco: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]],
+    numero: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20), Validators.pattern('^[0-9]*$')]],
+    complemento: [''],
+    formaPagamento: ['', Validators.required]
+  });
+
+
+  constructor(private ordemCompraService: OrdemCompraService, private fb: FormBuilder) { }
 
   ngOnInit() {
 
   }
 
-  public confirmarCompra(form): void {
-    console.log(form.value);
-    // console.log(this.formulario);
-    // console.log(this.model);
+  public confirmarCompra(): void {
+    // TODO: Use EventEmitter with form value
+    console.warn(this.formulario.value);
+    const pedido = new Pedido(
+      0,
+      this.formulario.value.number,
+      this.formulario.value.endereco,
+      this.formulario.value.complemento,
+      this.formulario.value.formaPagamento
+    );
 
-    // const pedido = new Pedido(
-    //   0,
-    //   form.value.endereco,
-    //   form.value.numero,
-    //   form.value.complemento,
-    //   form.value.formaPagamento
-    // );
-
-    // console.log('pedido ', pedido);
-
-    this.ordemCompraService.efetivarCompra(this.model)
-      .subscribe((idPedido: number) => {
-        console.log('Pedido cadastrado com sucesso! Id do Pedido', idPedido);
-        this.idPedidoCompra = idPedido;
-      },
-      (error: any) => console.log('Erro encontrado!', error));
-
+    this.ordemCompraService.efetivarCompra(pedido)
+        .subscribe((idPedido: number) => {
+          console.log('Numero pedido', idPedido);
+          this.idPedidoCompra = idPedido;
+        }, (error: any) => console.log('Erro Encontrado ', error));
 
   }
-
 }
