@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule,  Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
@@ -15,6 +15,8 @@ import { MainPrincipalComponent } from './shared/main-principal/main-principal.c
 import { FooterComponent } from './shared/footer/footer.component';
 import { MenuLoginComponent } from './shared/menu-login/menu-login.component';
 import { HomeComponent } from './home/home.component';
+import { ListaEventosComponent } from './eventos/lista-eventos/lista-eventos.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { HomeComponent } from './home/home.component';
     MainPrincipalComponent,
     FooterComponent,
     MenuLoginComponent,
-    HomeComponent
+    HomeComponent,
+    ListaEventosComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ import { HomeComponent } from './home/home.component';
     CollapseModule.forRoot(),
     CarouselModule.forRoot()
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
