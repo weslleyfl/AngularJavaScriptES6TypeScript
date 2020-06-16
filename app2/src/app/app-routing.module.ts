@@ -12,8 +12,7 @@ import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
 // https://www.positronx.io/angular-router-tutorial/
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '', component: HomeComponent },
+  // { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'restaurantes', component: RestaurantesComponent },
   { path: 'diversao', component: DiversaoComponent },
@@ -28,6 +27,7 @@ const routes: Routes = [
   },
   { path: 'ordem-compra', component: OrdemCompraComponent },
   // { path: 'product-detail/:id/:subId', component: ProductDetailComponent }
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: NoPageFoundComponent }
 
 ];

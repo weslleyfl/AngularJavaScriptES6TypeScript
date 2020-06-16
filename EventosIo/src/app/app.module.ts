@@ -1,6 +1,8 @@
 import { BrowserModule,  Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 // bootstraps
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -17,6 +19,7 @@ import { MenuLoginComponent } from './shared/menu-login/menu-login.component';
 import { HomeComponent } from './home/home.component';
 import { ListaEventosComponent } from './eventos/lista-eventos/lista-eventos.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +30,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MenuLoginComponent,
     HomeComponent,
     ListaEventosComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    InscricaoComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CustomFormsModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     CarouselModule.forRoot()

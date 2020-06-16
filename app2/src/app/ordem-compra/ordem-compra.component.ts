@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 
 import { OrdemCompraService } from '../servicos/ordem-compra.service';
 import { Pedido } from './../shared/pedido.model';
-
+import { CarrinhoService } from '../servicos/carrinho.service';
+import { ItemCarrinho } from '../shared/item-carrinho.model';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { Pedido } from './../shared/pedido.model';
 export class OrdemCompraComponent implements OnInit {
 
   public idPedidoCompra: number;
+  public itensCarrinho: ItemCarrinho[] = [];
+
   // public formulario = new FormGroup({
   //   endereco: new FormControl(''),
   //   numero: new FormControl(''),
@@ -30,28 +33,51 @@ export class OrdemCompraComponent implements OnInit {
   });
 
 
-  constructor(private ordemCompraService: OrdemCompraService, private fb: FormBuilder) { }
+  constructor(
+    private ordemCompraService: OrdemCompraService,
+    private fb: FormBuilder,
+    public carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
-
+    this.itensCarrinho = this.carrinhoService.exibirItens();
+    console.log(this.itensCarrinho);
   }
 
   public confirmarCompra(): void {
     // TODO: Use EventEmitter with form value
-    console.warn(this.formulario.value);
+    // console.warn(this.formulario.value);
+
+    if (!this.verficarItensNoCarrinho()) {
+      alert('Voce nao selecionou nenhum item');
+      return;
+    }
+
     const pedido = new Pedido(
       0,
       this.formulario.value.number,
       this.formulario.value.endereco,
       this.formulario.value.complemento,
-      this.formulario.value.formaPagamento
+      this.formulario.value.formaPagamento,
+      this.carrinhoService.exibirItens()
     );
 
     this.ordemCompraService.efetivarCompra(pedido)
-        .subscribe((idPedido: number) => {
-          console.log('Numero pedido', idPedido);
-          this.idPedidoCompra = idPedido;
-        }, (error: any) => console.log('Erro Encontrado ', error));
+      .subscribe((idPedido: number) => {
+        this.carrinhoService.limparCarrinho();
+        this.idPedidoCompra = idPedido;
+      }, (error: any) => console.log('Erro Encontrado ', error));
 
+  }
+
+  public adicionar(item: ItemCarrinho): void {
+    this.carrinhoService.adicionarQuantidade(item);
+  }
+
+  public remover(item: ItemCarrinho): void {
+    this.carrinhoService.removerQuantidade(item);
+  }
+
+  public verficarItensNoCarrinho(): boolean {
+    return (this.carrinhoService.exibirItens().length > 0);
   }
 }
