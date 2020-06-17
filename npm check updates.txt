@@ -1,0 +1,7 @@
+https://www.npmjs.com/package/npm-check-updates?activeTab=dependents
+
+npm install -g npm-check-updates
+
+> ncu
+
+--- vai te auxiliar na hora de fazer a atualizaçao de versao mais recente do angular - video 23

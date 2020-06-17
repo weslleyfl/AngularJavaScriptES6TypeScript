@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { HttpClientModule } from '@angular/common/http';
 
 // bootstraps
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -40,6 +41,7 @@ import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
     ReactiveFormsModule,
     FormsModule,
     CustomFormsModule,
+    HttpClientModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     CarouselModule.forRoot()

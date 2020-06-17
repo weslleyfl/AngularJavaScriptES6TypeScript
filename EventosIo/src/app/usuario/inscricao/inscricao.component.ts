@@ -7,6 +7,7 @@ import { merge } from 'rxjs';
 
 import { Organizador } from '../models/organizador';
 import { GenericValidator } from 'src/app/utils/generic-form-validator';
+import { OrganizadorService } from 'src/app/services/organizador.service';
 
 
 @Component({
@@ -24,13 +25,16 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
 
   private validationMessages: { [key: string]: { [key: string]: string } };
   public displayMessage: { [key: string]: string } = {};
+  public errors: any[] = [];
 
   // get property to make easy to access the form controls on the HTML form
   public get formControls() {
     return this.inscricaoForm.controls;
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private organizadorService: OrganizadorService) {
 
     this.validationMessages = {
       nome: {
@@ -95,12 +99,28 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
     if (this.inscricaoForm.dirty && this.inscricaoForm.valid) {
 
       const org = Object.assign({}, this.organizador, this.inscricaoForm.value);
-      console.log(org.nome);
-      console.log('form ', this.inscricaoForm);
+
+      this.organizadorService.registrarOrganizador(org)
+        .subscribe(
+          (result: Organizador) => { this.onSaveComplete(result); },
+          (error: any) => { this.onError(error); }
+        );
 
     }
 
-
   }
 
+  private onSaveComplete(response: Organizador): void {
+    this.errors = [];
+    this.inscricaoForm.reset();
+  }
+
+  private onError(fail: any) {
+    this.errors = fail.error.errors;
+  }
+
+
+
 }
+
+

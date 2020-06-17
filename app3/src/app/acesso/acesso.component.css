@@ -1,0 +1,19 @@
+    div {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        padding-top: 5%
+    }
+    
+    .bg-padrao {
+        background: #FAFAFA
+    }
+    
+    .bd-example {
+        position: relative;
+        padding: 1rem;
+        margin: 1rem -15px 0;
+        border: solid #f8f9fa;
+        border-width: .2rem 0 0;
+    }
