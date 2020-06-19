@@ -13,12 +13,14 @@ import { BaseService } from './base.service';
 })
 export class OrganizadorService extends BaseService {
 
-
   constructor(private http: HttpClient) { super(); }
 
   public registrarOrganizador(organizador: Organizador): Observable<Organizador> {
+
+    const url = `${this.UrlServiceV1}nova-conta`;
+
     const response = this.http
-      .post<Organizador>(`${super.UrlServiceV1}nova-conta`, organizador, super.httpJsonOptions)
+      .post<Organizador>(url, organizador, this.httpJsonOptions)
       .pipe(
         map(super.extractData),
         catchError(super.serviceError)

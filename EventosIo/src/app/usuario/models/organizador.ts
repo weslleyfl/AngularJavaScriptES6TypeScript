@@ -3,6 +3,6 @@ export class Organizador {
     nome: string;
     CPF: string;
     email: string;
-    senha: string;
-    senhaConfirmacao: string;
+    password: string;
+    confirmPassword: string;
 }

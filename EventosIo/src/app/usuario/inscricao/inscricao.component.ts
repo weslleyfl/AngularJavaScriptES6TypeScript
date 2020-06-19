@@ -50,11 +50,11 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
         required: 'Informe o e-mail',
         email: 'Email invalido'
       },
-      senha: {
+      password: {
         required: 'Informe a senha',
         minlength: 'A senha deve possuir no mínimo 6 caracteres'
       },
-      senhaConfirmacao: {
+      confirmPassword: {
         required: 'Informe a senha novamente',
         minlength: 'A senha deve possuir no mínimo 6 caracteres',
         equalTo: 'As senhas não conferem'
@@ -75,8 +75,8 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
       cpf: ['', [Validators.required, CustomValidators.rangeLength([11, 11])]],
       email: ['', [Validators.required, CustomValidators.email]],
-      senha: senhaControl,
-      senhaConfirmacao: senhaConfirmacaoControl
+      password: senhaControl,
+      confirmPassword: senhaConfirmacaoControl
     });
 
   }
@@ -110,13 +110,24 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
 
   }
 
-  private onSaveComplete(response: Organizador): void {
-    this.errors = [];
+  private onSaveComplete(response: any): void {
+    this.resetError();
+    console.log('Resposta Save ', response);
     this.inscricaoForm.reset();
+
+    localStorage.setItem('eio.token', response.access_token);
+    localStorage.setItem('eio.user', JSON.stringify(response.user));
   }
 
-  private onError(fail: any) {
-    this.errors = fail.error.errors;
+  private onError(fail: any): void {
+    this.resetError();
+    this.errors.push(fail);
+    // this.errors = fail.error.errors;
+    // console.log(fail);
+  }
+
+  private resetError(): void {
+    this.errors = [];
   }
 
 
