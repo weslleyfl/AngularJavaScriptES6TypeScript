@@ -1,4 +1,9 @@
-<ul class="nav navbar-nav navbar-right">
-    <li><a routerLinkActive="active" [routerLink]="['/inscricao']">Registre-se</a></li>
-    <li><a routerLinkActive="active" [routerLink]="['/home']">Entrar</a></li>
+<ul [ngSwitch]="usuarioLogado()" class="nav navbar-nav navbar-right">
+
+    <li *ngSwitchCase="false"><a routerLinkActive="active" [routerLink]="['/inscricao']">Registre-se</a></li>
+    <li *ngSwitchCase="false"><a routerLinkActive="active" [routerLink]="['/entrar']">Entrar</a></li>
+
+    <li *ngSwitchCase="true"><a href="javascript:void(0)">Ola {{ nome }}</a></li>
+    <li *ngSwitchCase="true"><a href="javascript:void(0)" (click)="logout()">Sair</a></li>
+
 </ul>

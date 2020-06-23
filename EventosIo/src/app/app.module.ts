@@ -1,9 +1,12 @@
-import { BrowserModule,  Title } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { HttpClientModule } from '@angular/common/http';
+
+import { ToastrModule } from 'ngx-toastr';
+
 
 // bootstraps
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -21,6 +24,7 @@ import { HomeComponent } from './home/home.component';
 import { ListaEventosComponent } from './eventos/lista-eventos/lista-eventos.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
+import { LoginComponent } from './usuario/login/login/login.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
     HomeComponent,
     ListaEventosComponent,
     PageNotFoundComponent,
-    InscricaoComponent
+    InscricaoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,13 @@ import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
     HttpClientModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      preventDuplicates: true,
+      progressBar: true,
+      closeButton: true
+    })
   ],
   providers: [Title],
   bootstrap: [AppComponent]

@@ -2,38 +2,32 @@ import { Component, OnInit, ElementRef, ViewChildren, AfterViewInit } from '@ang
 import { FormGroup, FormBuilder, Validators, FormControl, FormControlName } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { Observable, fromEvent } from 'rxjs';
 import { merge } from 'rxjs';
 
-import { Organizador } from '../models/organizador';
 import { GenericValidator } from 'src/app/utils/generic-form-validator';
 import { OrganizadorService } from 'src/app/services/organizador.service';
-import { ToastrService } from 'ngx-toastr';
-
-
+import { Organizador } from '../../models/organizador';
 
 @Component({
-  selector: 'app-inscricao',
-  templateUrl: './inscricao.component.html',
-  styleUrls: ['./inscricao.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class InscricaoComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
-  public inscricaoForm: FormGroup;
+  public loginForm: FormGroup;
   private organizador: Organizador;
   private genericValidator: GenericValidator;
 
   private validationMessages: { [key: string]: { [key: string]: string } };
   public displayMessage: { [key: string]: string } = {};
   public errors: any[] = [];
-
-  // get property to make easy to access the form controls on the HTML form
-  public get formControls() {
-    return this.inscricaoForm.controls;
-  }
+  public clicked = false;
 
   constructor(
     private fb: FormBuilder,
@@ -43,15 +37,6 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
   ) {
 
     this.validationMessages = {
-      nome: {
-        required: 'O Nome é requerido.',
-        minlength: 'O Nome precisa ter no mínimo 2 caracteres',
-        maxlength: 'O Nome precisa ter no máximo 150 caracteres'
-      },
-      cpf: {
-        required: 'Informe o CPF',
-        rangeLength: 'CPF deve conter 11 caracteres'
-      },
       email: {
         required: 'Informe o e-mail',
         email: 'Email invalido'
@@ -59,11 +44,6 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
       password: {
         required: 'Informe a senha',
         minlength: 'A senha deve possuir no mínimo 6 caracteres'
-      },
-      confirmPassword: {
-        required: 'Informe a senha novamente',
-        minlength: 'A senha deve possuir no mínimo 6 caracteres',
-        equalTo: 'As senhas não conferem'
       }
     };
 
@@ -73,16 +53,12 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    const senhaControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
-    const senhaConfirmacaoControl = new FormControl('', [Validators.required, Validators.minLength(6),
-    CustomValidators.equalTo(senhaControl)]);
 
-    this.inscricaoForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
-      cpf: ['', [Validators.required, CustomValidators.rangeLength([11, 11])]],
+    this.loginForm = this.fb.group({
+
       email: ['', [Validators.required, CustomValidators.email]],
-      password: senhaControl,
-      confirmPassword: senhaConfirmacaoControl
+      password: ['', [Validators.required, Validators.minLength(6)]]
+
     });
 
   }
@@ -93,38 +69,33 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
       .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
 
     merge(...controlBlurs).subscribe(value => {
-      this.displayMessage = this.genericValidator.processMessages(this.inscricaoForm);
+      this.displayMessage = this.genericValidator.processMessages(this.loginForm);
     });
 
   }
 
-  public adicionarOrganizador(): void {
 
-    this.displayMessage = this.genericValidator.processMessages(this.inscricaoForm);
+  public login(): void {
+    if (this.loginForm.dirty && this.loginForm.valid) {
+      this.clicked = true;
+      const p = Object.assign({}, this.organizador, this.loginForm.value);
 
-    if (this.inscricaoForm.dirty && this.inscricaoForm.valid) {
-
-      const org = Object.assign({}, this.organizador, this.inscricaoForm.value);
-
-      this.organizadorService.registrarOrganizador(org)
+      this.organizadorService.login(p)
         .subscribe(
           (result: Organizador) => { this.onSaveComplete(result); },
-          (error: any) => { this.onError(error); }
-        );
-
+          (fail: any) => { this.onError(fail); });
     }
-
   }
+
 
   private onSaveComplete(response: any): void {
     this.resetError();
-    console.log('Resposta Save ', response);
-    this.inscricaoForm.reset();
+    this.loginForm.reset();
 
     localStorage.setItem('eio.token', response.access_token);
     localStorage.setItem('eio.user', JSON.stringify(response.user));
 
-    this.toastr.success('Registro realizado com Sucesso!', 'Bem vindo!!!')
+    this.toastr.success('Login realizado com Sucesso!', 'Bem vindo!!!')
       .onHidden
       .subscribe(() => this.router.navigate(['/home']));
 
@@ -133,7 +104,7 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
   private onError(fail: any): void {
     this.resetError();
     this.errors.push(fail);
-
+    this.clicked = false;
     this.toastr.error('Ocorreu um erro!', 'Opa :(');
 
   }
@@ -142,6 +113,5 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
     this.errors = [];
   }
 
+
 }
-
-

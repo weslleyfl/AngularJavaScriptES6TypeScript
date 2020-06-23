@@ -17,7 +17,7 @@ export class OrganizadorService extends BaseService {
 
   public registrarOrganizador(organizador: Organizador): Observable<Organizador> {
 
-    const url = `${this.UrlServiceV1}nova-conta`;
+    const url = `${this.UrlServiceV1}/nova-conta`;
 
     const response = this.http
       .post<Organizador>(url, organizador, this.httpJsonOptions)
@@ -28,5 +28,19 @@ export class OrganizadorService extends BaseService {
 
     return response;
   }
+
+  public login(organizador: Organizador): Observable<Organizador> {
+    const url = `${this.UrlServiceV1}/conta`;
+
+    const response = this.http
+      .post<Organizador>(url, organizador, super.httpJsonOptions)
+      .pipe(
+        map(super.extractData),
+        catchError(super.serviceError)
+      );
+
+    return response;
+  }
+
 
 }
