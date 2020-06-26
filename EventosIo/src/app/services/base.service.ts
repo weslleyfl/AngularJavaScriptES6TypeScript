@@ -7,12 +7,24 @@ export abstract class BaseService {
     protected UrlServiceV1 = 'https://localhost:5001/api/v1';
     // protected UrlServiceV1 = 'https://localhost:44346/api/v1';
 
+    constructor() { }
+
     protected httpJsonOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    constructor() { }
+    protected httpJsonAuth() {
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${this.ObterTokenUsuario()}`
+            })
+        };
+    }
 
+    protected ObterTokenUsuario(): string {
+        return localStorage.getItem('eio.token');
+    }
 
     protected serviceHandlerError(error: Response | any) {
         let errMsg: string;
@@ -27,26 +39,24 @@ export abstract class BaseService {
         return throwError(error);
     }
 
-    protected serviceError(error: HttpErrorResponse | Response | any) {
+    protected serviceError(error: HttpErrorResponse) {
 
         let errMsg: string;
 
-        if (error instanceof Response) {
-            errMsg = `${error.status} - ${error.statusText || ''}`;
-        } else if (error.error instanceof ErrorEvent) {
+        if (error.error instanceof ErrorEvent) {
             errMsg = `Um erro encontrado: ${error.error.message} `;
         } else {
             errMsg = error.message ? error.message : error.toString();
             console.log
                 (
                     `Coidgo retornado do Backend: ${error.status}, ` +
-                    `Erro mensagem: ${errMsg} ` +
-                    `Body was: ${JSON.stringify(error)}`
+                    `Erro mensagem: ${errMsg} `
+                    // `Body was: ${JSON.stringify(error)}`
                 );
         }
 
         console.log('Meu log Erro: ', error);
-        const fail = (error.error?.errors) ? error.error.errors : error.message;
+        const fail = (error.error) ? error.error.errors : error.message;
         return throwError(fail);
 
     }

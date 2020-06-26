@@ -132,7 +132,7 @@ export class InscricaoComponent implements OnInit, AfterViewInit {
 
   private onError(fail: any): void {
     this.resetError();
-    this.errors.push(fail);
+    this.errors = fail;
 
     this.toastr.error('Ocorreu um erro!', 'Opa :(');
 

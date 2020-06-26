@@ -1,5 +1,5 @@
 export class StringUtils {
-    public static isNullOrEmpty(val: string): boolean {
+    public static isNullOrEmpty(val: string) : boolean {
         if (val === undefined || val === null || val.trim() === '') {
             return true;
         }
@@ -7,8 +7,3 @@ export class StringUtils {
     };
 }
 
-// '1' == 1 = true
-// '1' != 1 = false
-
-// '1' === 1 = false
-// '1' !== 1 = true

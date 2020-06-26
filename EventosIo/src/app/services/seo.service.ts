@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 // import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
-import { StringUtils } from '../utils/string.utils';
+import { StringUtils } from '../utils/string-utils';
 
 /* --
   SEO (Search Engine Optimization ou Otimização para Ferramentas de Busca)

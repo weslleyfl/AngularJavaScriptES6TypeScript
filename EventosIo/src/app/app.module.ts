@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { HttpClientModule } from '@angular/common/http';
-
 import { ToastrModule } from 'ngx-toastr';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 // bootstraps
@@ -25,6 +25,7 @@ import { ListaEventosComponent } from './eventos/lista-eventos/lista-eventos.com
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
 import { LoginComponent } from './usuario/login/login/login.component';
+import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-evento.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginComponent } from './usuario/login/login/login.component';
     ListaEventosComponent,
     PageNotFoundComponent,
     InscricaoComponent,
-    LoginComponent
+    LoginComponent,
+    AdicionarEventoComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { LoginComponent } from './usuario/login/login/login.component';
       preventDuplicates: true,
       progressBar: true,
       closeButton: true
-    })
+    }),
+    MyDatePickerModule
   ],
   providers: [Title],
   bootstrap: [AppComponent]
