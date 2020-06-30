@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SeoModel, SeoService } from 'src/app/services/seo.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { EventoService } from '../services/evento.service';
+import { Evento } from '../models/evento';
 
 @Component({
   selector: 'app-lista-eventos',
@@ -8,7 +11,14 @@ import { SeoModel, SeoService } from 'src/app/services/seo.service';
 })
 export class ListaEventosComponent implements OnInit {
 
-  constructor(private seoService: SeoService) {
+  public eventos: Evento[];
+  public errorMessage: string;
+
+  constructor(
+    private seoService: SeoService,
+    private eventoService: EventoService,
+    private spinner: NgxSpinnerService
+  ) {
 
     const seoModel: SeoModel = {
       title: 'Próximos Eventos',
@@ -22,6 +32,17 @@ export class ListaEventosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.spinner.show();
+    this.eventoService.obterTodos()
+      .subscribe((eventos: Evento[]) => {
+        this.spinner.hide();
+        this.eventos = eventos;
+      }, (error: any) => {
+        this.spinner.hide();
+        this.errorMessage = error;
+      });
+
   }
 
 }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, FormControlName } from
 import { CustomValidators } from 'ng2-validation';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { Observable, fromEvent } from 'rxjs';
 import { merge } from 'rxjs';
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private organizadorService: OrganizadorService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
 
     this.validationMessages = {
@@ -78,12 +80,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public login(): void {
     if (this.loginForm.dirty && this.loginForm.valid) {
       this.clicked = true;
+      this.spinner.show();
       const p = Object.assign({}, this.organizador, this.loginForm.value);
 
       this.organizadorService.login(p)
         .subscribe(
-          (result: Organizador) => { this.onSaveComplete(result); },
-          (fail: any) => { this.onError(fail); });
+          (result: Organizador) => {
+            this.spinner.hide();
+            this.onSaveComplete(result);
+          },
+          (fail: any) => {
+            this.spinner.hide();
+            this.onError(fail);
+          });
     }
   }
 

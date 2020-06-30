@@ -1,17 +1,23 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { MyDatePickerModule } from 'mydatepicker';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 // bootstraps
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+
+// format cultura language
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt, 'pt-BR');
 
 // components
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +32,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { InscricaoComponent } from './usuario/inscricao/inscricao.component';
 import { LoginComponent } from './usuario/login/login/login.component';
 import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-evento.component';
+import { MeusEventosComponent } from './eventos/meus-eventos/meus-eventos.component';
+import { EditarEventoComponent } from './eventos/editar-evento/editar-evento.component';
+import { ExcluirEventoComponent } from './eventos/excluir-evento/excluir-evento.component';
+
+
 
 @NgModule({
   declarations: [
@@ -36,10 +47,13 @@ import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-e
     MenuLoginComponent,
     HomeComponent,
     ListaEventosComponent,
+    MeusEventosComponent,
     PageNotFoundComponent,
     InscricaoComponent,
     LoginComponent,
     AdicionarEventoComponent,
+    EditarEventoComponent,
+    ExcluirEventoComponent
   ],
   imports: [
     BrowserModule,
@@ -53,14 +67,19 @@ import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-e
     CollapseModule.forRoot(),
     CarouselModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 2000,
       preventDuplicates: true,
       progressBar: true,
       closeButton: true
     }),
-    MyDatePickerModule
+    MyDatePickerModule,
+    NgxSpinnerModule
   ],
-  providers: [Title],
+  providers: [
+    Title,
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

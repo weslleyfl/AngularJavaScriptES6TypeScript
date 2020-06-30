@@ -7,8 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuSuperiorComponent implements OnInit {
 
+  private token: string;
   public isCollapsed = true;
   constructor() { }
+
+  public usuarioLogado(): boolean {
+    this.token = localStorage.getItem('eio.token');
+    if (!this.token) {
+      return false;
+    }
+
+    return true;
+  }
 
   ngOnInit(): void {
   }

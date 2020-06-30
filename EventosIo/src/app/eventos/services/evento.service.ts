@@ -27,6 +27,32 @@ export class EventoService extends BaseService {
       );
   }
 
+  public obterEvento(id: string): Observable<Evento> {
+    return this.http
+      .get<Evento>(`${this.UrlServiceV1}/eventos/${id}`)
+      .pipe(
+        catchError(super.serviceError)
+      );
+  }
+
+  public obterTodos(): Observable<Evento[]> {
+    return this.http
+      .get<Evento[]>(`${this.UrlServiceV1}/eventos`)
+      .pipe(
+        catchError(super.serviceError)
+      );
+  }
+
+  public obterMeusEventos(): Observable<Evento[]> {
+
+    return this.http
+      .get<Evento[]>(`${this.UrlServiceV1}/eventos/meus-eventos`, super.httpJsonAuth())
+      .pipe(
+        catchError(super.serviceError)
+      );
+
+  }
+
   public registrarEvento(evento: Evento): Observable<Evento> {
     evento.id = undefined;
     const resposta = this.http.post<Evento>(`${this.UrlServiceV1}/eventos`, evento, super.httpJsonAuth())

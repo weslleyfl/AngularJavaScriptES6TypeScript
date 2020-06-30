@@ -39,6 +39,7 @@ export abstract class BaseService {
         return throwError(error);
     }
 
+
     protected serviceError(error: HttpErrorResponse) {
 
         let errMsg: string;
@@ -56,7 +57,12 @@ export abstract class BaseService {
         }
 
         console.log('Meu log Erro: ', error);
-        const fail = (error.error) ? error.error.errors : error.message;
+        const fail = (
+            error.error !== null &&
+            error.error !== undefined &&
+            error.error.errors !== undefined
+        ) ? error.error.errors : error.message;
+
         return throwError(fail);
 
     }
