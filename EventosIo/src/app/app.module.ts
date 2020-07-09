@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { MyDatePickerModule } from 'mydatepicker';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -35,6 +35,9 @@ import { AdicionarEventoComponent } from './eventos/adicionar-evento/adicionar-e
 import { MeusEventosComponent } from './eventos/meus-eventos/meus-eventos.component';
 import { EditarEventoComponent } from './eventos/editar-evento/editar-evento.component';
 import { ExcluirEventoComponent } from './eventos/excluir-evento/excluir-evento.component';
+import { DetalhesEventoComponent } from './eventos/detalhes-evento/detalhes-evento.component';
+import { SafePipe } from './common/pipes/safe.pipe';
+import { ErrorInterceptor } from './eventos/services/error-interceptor.service';
 
 
 
@@ -53,7 +56,9 @@ import { ExcluirEventoComponent } from './eventos/excluir-evento/excluir-evento.
     LoginComponent,
     AdicionarEventoComponent,
     EditarEventoComponent,
-    ExcluirEventoComponent
+    ExcluirEventoComponent,
+    DetalhesEventoComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,8 @@ import { ExcluirEventoComponent } from './eventos/excluir-evento/excluir-evento.
   providers: [
     Title,
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -144,7 +144,7 @@ export class AdicionarEventoComponent implements OnInit, AfterViewInit {
 
     this.toastr.success('Evento Registrado com Sucesso!', 'Oba :D')
       .onHidden
-      .subscribe(() => this.router.navigate(['/eventos/meus-eventos']));
+      .subscribe(() => this.router.navigate(['/meus-eventos']));
   }
 
   private onError(fail: any): void {

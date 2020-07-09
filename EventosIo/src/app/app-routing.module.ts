@@ -21,18 +21,28 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
   { path: 'home', component: HomeComponent },
   { path: 'proximos-eventos', component: ListaEventosComponent },
-  { path: 'meus-eventos', component: MeusEventosComponent },
   { path: 'inscricao', component: InscricaoComponent },
   { path: 'entrar', component: LoginComponent },
-  { path: 'eventos/detalhes/:id', component: DetalhesEventoComponent },
-  { path: 'eventos/editar/:id', component: EditarEventoComponent },
-  { path: 'eventos/excluir/:id', component: ExcluirEventoComponent },
+  { path: 'detalhes/:id', component: DetalhesEventoComponent },
+
   {
-    path: 'novo-evento', component: AdicionarEventoComponent,
-    canActivate: [AuthService],
+    path: 'editar/:id', component: EditarEventoComponent, canActivate: [AuthService],
+    data: [{ claim: { nome: 'Eventos', valor: 'Gravar' } }]
+  },
+  {
+    path: 'excluir/:id', component: ExcluirEventoComponent, canActivate: [AuthService],
+    data: [{ claim: { nome: 'Eventos', valor: 'Gravar' } }]
+  },
+  {
+    path: 'meus-eventos', component: MeusEventosComponent, canActivate: [AuthService],
+    data: [{ claim: { nome: 'Eventos', valor: 'Gravar' } }]
+  },
+  {
+    path: 'novo-evento', component: AdicionarEventoComponent, canActivate: [AuthService],
     data: [{ claim: { nome: 'Eventos', valor: 'Gravar' } }]
   },
   { path: 'acesso-negado', component: AcessoNegadoComponent },
+  { path: 'nao-encontrado', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent }
 
 ];

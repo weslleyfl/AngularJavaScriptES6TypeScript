@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -16,9 +16,10 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
-
+import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
       LoginComponent,
       CadastroComponent,
       HomeComponent,
-      PublicacoesComponent
+      PublicacoesComponent,
+      IncluirPublicacaoComponent
    ],
    imports: [
       BrowserModule,
@@ -37,11 +39,14 @@ import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
       AppRoutingModule,
       NgbModule,
       ReactiveFormsModule,
+      FormsModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireDatabaseModule,
-      AngularFireAuthModule
+      AngularFireAuthModule,
+      AngularFireStorageModule
+
    ],
-   providers: [],
+   providers: [NgbActiveModal],
    bootstrap: [
       AppComponent
    ]

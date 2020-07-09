@@ -35,7 +35,7 @@ export abstract class BaseService {
         else {
             errMsg = error.message ? error.message : error.toString();
         }
-        console.error(error);
+        // console.error(error);
         return throwError(error);
     }
 
@@ -48,15 +48,15 @@ export abstract class BaseService {
             errMsg = `Um erro encontrado: ${error.error.message} `;
         } else {
             errMsg = error.message ? error.message : error.toString();
-            console.log
-                (
-                    `Coidgo retornado do Backend: ${error.status}, ` +
-                    `Erro mensagem: ${errMsg} `
-                    // `Body was: ${JSON.stringify(error)}`
-                );
+            // console.log
+            //     (
+            //         `Coidgo retornado do Backend: ${error.status}, ` +
+            //         `Erro mensagem: ${errMsg} `
+            //         // `Body was: ${JSON.stringify(error)}`
+            //     );
         }
 
-        console.log('Meu log Erro: ', error);
+        // console.log('Meu log Erro: ', error);
         const fail = (
             error.error !== null &&
             error.error !== undefined &&

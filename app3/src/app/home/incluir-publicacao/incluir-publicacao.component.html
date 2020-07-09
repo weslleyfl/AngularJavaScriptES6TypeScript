@@ -1,0 +1,121 @@
+<ng-template #content let-modal>
+
+    <div *ngIf="!conscluido">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Criar uma Publicação</h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- conteudo -->
+                <form [formGroup]="formulario" (ngSubmit)="publicar()">
+
+                    <!-- file upload -->
+                    <!-- https://netbasal.com/how-to-implement-file-uploading-in-angular-reactive-forms-89a3fffa1a03 -->
+
+
+                    <!-- <div class="form-group row d-flex justify-content-lg-start align-items-lg-start">                       
+                        <div class="col-sm-5">
+                            <input type="file" style="display: none;" accept="image/*" (change)="preparaImagemUpload($event)" #fileInput>
+                            <button type="button" (click)="fileInput.click()" class="btn btn-secondary" ngbTooltip="Arquivo Imagem para Publicacao">Pegar Imagem</button>
+                        </div>
+                        <label for="file" class="col-form-label col-sm-7 text-right">{{ nomeImagem }}</label>
+                    </div> -->
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" accept="image/*" class="custom-file-input" (change)="preparaImagemUpload($event)" id="inputGroupFile01">
+                                <input type="hidden" name="fileHidden" formControlName="imageInput" required />
+                                <!-- Validation Field -->
+                                <label class="custom-file-label" for="inputGroupFile01">{{ (imageInput.valid)? nomeImagem : 'Selecione uma Imagem'}}  </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex justify-content-lg-start align-items-lg-start">
+                        <label for="titulo" class="col-form-label col-sm-2 text-left">Titulo:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="titulo" id="titulo" formControlName="titulo" class="form-control" placeholder="Titulo da Publicacao" required>
+                            <!-- Validation Field -->
+                            <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="alert alert-danger">
+
+                                <div *ngIf="titulo.errors.required">
+                                    Titulo é obrigatorio..
+                                </div>
+                                <div *ngIf="titulo.errors.minlength">
+                                    Titulo deve ter pelo menos 4 characters.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Fechar</button>
+                        <!-- <button type="button" class="btn btn-outline-primary" (click)="modal.close('Save click')">Publicar</button> -->
+                        <button type="submit" class="btn btn-primary mr-2" [disabled]="!formulario.valid">Publicar</button>
+                    </div>
+
+                </form>
+
+                <!-- <div *ngIf="showProgressBar">
+                   <div class="progress" *ngIf="uploadProgress$ | async as progress">
+                      <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': progress + '%' }"></div>               
+                 </div>
+                </div> -->
+
+                <div *ngIf="showProgressBar">
+                    <div *ngIf="uploadProgress$ | async as progress">
+                        <ngb-progressbar type="success" textType="white" [value]="progress.toPrecision(2)" [showValue]="true"></ngb-progressbar>
+                    </div>
+                </div>
+
+                <!-- fim conteudo -->
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- imagem publicada -->
+
+    <div *ngIf="conscluido">
+
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="modal-title">Imagem Publicada com Sucesso</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h6 class="modal-title">{{ nomeImagem }}</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <img [src]="urlImagem" id="imagepreview" style="width: 425px; height: 425px;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+
+</ng-template>
+
+<button class="add-post" (click)="open(content)"></button>

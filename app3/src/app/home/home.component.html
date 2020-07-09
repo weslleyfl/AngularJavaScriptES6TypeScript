@@ -2,7 +2,8 @@
     <div class="container">
         <div class="logo"></div>
         <div>
-            <div class="add-post"></div>
+            <!-- <div class="add-post"></div> -->
+            <app-incluir-publicacao (atualizarTimeLine)="atualizarTimeLine($event)"></app-incluir-publicacao>
             <a href="" (click)="sair()" style="margin-left: 25px"> Sair </a>
         </div>
     </div>
@@ -10,5 +11,5 @@
 
 <br /><br /><br />
 <div class="container">
-    <app-publicacoes></app-publicacoes>
+    <app-publicacoes #publicacoes></app-publicacoes>
 </div>

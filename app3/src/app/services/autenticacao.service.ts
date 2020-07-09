@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+
 // import * as firebase from 'firebase/app';
 // require('firebase/auth');
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
+
 import { Usuario } from '../acesso/usuario.model';
 
 
@@ -32,6 +34,7 @@ export class AutenticacaoService {
 
     return (this.tokenId !== undefined);
   }
+
 
   // https://www.fabricadecodigo.com/crud-firebase-angular/ --- exemplo
   public cadastrarUsuario(usuario: Usuario): Promise<any> {

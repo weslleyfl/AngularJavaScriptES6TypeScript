@@ -41,11 +41,8 @@ export class AuthService implements CanActivate {
       }
     }
 
-    console.log(claim);
-
-
+    // console.log(claim);
     return true;
-
 
   }
 }

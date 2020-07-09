@@ -1,0 +1,21 @@
+.add-post {
+    background-image: url('/assets/camera.png');
+    background-color: transparent;
+    /* make the button transparent */
+    background-repeat: no-repeat;
+    /* make the background image appear only once */
+    background-position: 0px 0px;
+    /* equivalent to 'top left' */
+    border: none;
+    /* assuming we don't want any borders */
+    width: 32px;
+    height: 32px;
+    float: left;
+}
+
+button:focus,
+button:active {
+    /* -moz-outline-style: none; */
+    outline: none;
+    outline: 0;
+}
