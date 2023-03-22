@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
-import { catchError, retry, tap, map } from 'rxjs/operators';
+import { catchError, retry, tap, map, first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../shared/oferta.model';
 import { URL_API_OFERTA, URL_API_COMO_USAR, URL_API_ONDE_FICA } from '../constantes/app.api';
@@ -31,6 +31,7 @@ export class OfertasService {
   public getOfertaPorId(id: number): Observable<Oferta> {
     return this.http.get<Oferta>(`${URL_API_OFERTA}?id=${id}`)
       .pipe(
+        first(),
         tap((ofer: Oferta) => console.log(`tap: id=${id}`, ofer[0])),
         map((oferta: Oferta) => oferta[0]),
         catchError(this.handleError<Oferta>('Oferta', null))
